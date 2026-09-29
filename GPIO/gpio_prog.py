@@ -1,13 +1,14 @@
 from machine import Pin, PWM
 import time
 
+# CONFIGURATION 
 PIN_LED = 16
 PIN_BOUTON = 18
 
 # Mettre False si ton module bouton envoie 0 (GND) quand on appuie
 BOUTON_ACTIF_HAUT = True
 
-# BONUS : nombre d'appuis pour passé ) un autre état
+# BONUS : nombre d'appuis pour passé à un autre état
 APPUIS_PAR_CHANGEMENT = 1
 
 # BONUS : effet de fondu lors du changement de mode
@@ -15,11 +16,11 @@ EFFET_TRANSITION = True
 
 ANTI_REBOND_MS = 50  # filtre les rebonds mécaniques du bouton
 
-# Liste des modes
+# Liste des modes (nom, demi période)
 MODES = [
     ("Eteinte", None),
-    ("Lent 0,5 Hz", 1000),  
-    ("Rapide 2 Hz", 250),   
+    ("Lent 0,5 Hz", 1000),  #1000 est la demi période
+    ("Rapide 2 Hz", 250),   #250 est la demi période
 ]
 
 # mes outils
@@ -69,7 +70,7 @@ print("Pret. Mode :", MODES[mode][0])
 while True:
     maintenant = time.ticks_ms()
 
-    # --- Lecture du bouton avec anti-rebond ---
+    # Lecture du bouton avec anti-rebond 
     appuye = est_appuye()
     if (appuye != etat_bouton_prec and
             time.ticks_diff(maintenant, dernier_changement_bouton) > ANTI_REBOND_MS):
@@ -97,7 +98,6 @@ while True:
     # --- Clignotement non bloquant ---
     demi_periode = MODES[mode][1]
     if demi_periode is not None:
-        print(time.ticks_ms(), dernier_basculement)
         if time.ticks_diff(time.ticks_ms(), dernier_basculement) >= demi_periode:
             etat_led = not etat_led
             if etat_led:
