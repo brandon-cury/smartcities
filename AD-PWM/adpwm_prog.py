@@ -143,19 +143,20 @@ def couper_son():
 melodie_actuelle = 0
 print("Tourne le potentiometre pour le volume, appuie sur le bouton pour changer de melodie")
 
-try:
-    while True:
-        nom, notes = MELODIES[melodie_actuelle]
-        print("Melodie :", nom)
 
-        changement = False
-        for note, duree in notes:
-            if jouer_note(note, duree):
-                changement = True
-                break
-        couper_son()
+while True:
+    nom, notes = MELODIES[melodie_actuelle]
+    print("Melodie :", nom)
 
-        # on change de mélodie si le bouton a été appuyé pendant la mélodie ou pendant la pause
-        if changement or attendre(PAUSE_FIN, False):
-            melodie_actuelle = (melodie_actuelle + 1) % len(MELODIES)
+    changement = False
+    for note, duree in notes:
+        if jouer_note(note, duree):
+            changement = True
+            break
+    couper_son()
 
+    # on change de mélodie si le bouton a été appuyé pendant la mélodie ou pendant la pause
+    if changement or attendre(PAUSE_FIN, False):
+        melodie_actuelle = (melodie_actuelle + 1) % len(MELODIES)
+            
+            
