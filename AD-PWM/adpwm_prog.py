@@ -2,8 +2,8 @@ from machine import Pin, PWM, ADC
 import time
 
 # CONFIGURATION
-PIN_POTENTIOMETRE = 26   # connecteur A0 du shield 
-PIN_BUZZER = 20          # connecteur D20 du shield (GP20)
+PIN_POTENTIOMETRE = 26   # A0 du shield 
+PIN_BUZZER = 20          # D20 du shield (GP20)
 PIN_BOUTON = 18          # BONUS : connect D18 - change de mélodie
 PIN_LED = 16             # BONUS : connect D16 - clignote au rythme des notes
 
@@ -103,7 +103,7 @@ def bouton_appuye():
 
 
 def attendre(duree_ms, son_actif):
-    """Attend duree_ms en mettant à jour le volume en continu et en surveillant le bouton.
+    """duree_ms en mettant à jour le volume en continu et en surveillant le bouton.
     Renvoie True si le bouton a été appuyé pendant l'attente."""
     debut = time.ticks_ms()
     while time.ticks_diff(time.ticks_ms(), debut) < duree_ms:
@@ -159,8 +159,3 @@ try:
         if changement or attendre(PAUSE_FIN, False):
             melodie_actuelle = (melodie_actuelle + 1) % len(MELODIES)
 
-except KeyboardInterrupt:
-    # sans cela, le buzzer continue de siffler après l'arrêt dans Thonny
-    couper_son()
-    buzzer.deinit()
-    print("Programme arrete")

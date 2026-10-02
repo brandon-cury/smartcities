@@ -56,10 +56,6 @@ Deux exercices sont réalisés :
 | Bouton-poussoir | **D18** | GP18 | exercice 2 (bonus) |
 | LED | **D16** | GP16 | exercice 2 (bonus) |
 
-> ⚠️ Le potentiomètre doit être branché sur un connecteur **A** (A0, A1 ou A2). Les connecteurs
-> **D** ne savent lire que 0 ou 1, pas une tension intermédiaire.
-
-> ⚠️ L'interrupteur du shield doit être placé sur **3V3**.
 
 ---
 
